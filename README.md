@@ -6,6 +6,7 @@
 - Browse (after authentication)
 
   - Header
+  - Login Form
   - Main Movie
     - movie trailer in background
     - movie title and description
