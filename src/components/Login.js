@@ -6,10 +6,16 @@ import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { BACKGROUND_IMG_URL, USER_AVATAR } from "../utils/constants";
+
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
   const [errorMessage, seterrorMessage] = useState(null);
+  const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -26,6 +32,7 @@ const Login = () => {
     if (errorMessage) return;
     //sign in, sign up
     if (!isSignInForm) {
+      //* sign up
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -35,6 +42,26 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           console.log("The user is: ", user);
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL: USER_AVATAR,
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              seterrorMessage(errorCode + " - " + errorMessage);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -42,16 +69,15 @@ const Login = () => {
           seterrorMessage(errorCode + " - " + errorMessage);
         });
     } else {
+      //* login
       signInWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           console.log("The user is: ", user);
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -68,7 +94,7 @@ const Login = () => {
       <Header></Header>
       <div>
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/893a42ad-6a39-43c2-bbc1-a951ec64ed6d/0d96eb6d-c491-4ffe-a317-6da60879080a/US-en-20231002-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src={BACKGROUND_IMG_URL}
           alt="background"
           className="absolute"
         ></img>

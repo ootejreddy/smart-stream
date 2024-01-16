@@ -8,6 +8,7 @@ const Body = () => {
     { path: "/", element: <Login></Login> },
     { path: "/browse", element: <Browse></Browse> },
   ]);
+
   return (
     <div>
       <RouterProvider router={appRouter}></RouterProvider>
