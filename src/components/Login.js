@@ -92,11 +92,11 @@ const Login = () => {
   return (
     <div>
       <Header></Header>
-      <div>
+      <div className="">
         <img
           src={BACKGROUND_IMG_URL}
           alt="background"
-          className="absolute"
+          className="absolute object-cover w-full h-full"
         ></img>
       </div>
       <div className="w-3/12 my-44 mx-auto right-0 left-0 absolute">
