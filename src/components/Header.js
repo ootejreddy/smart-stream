@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleGPTSearch } from "../utils/gptSlice";
 import { onAuthStateChanged } from "firebase/auth";
-import { LOGO } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -21,6 +24,15 @@ const Header = () => {
         navigate("/error");
       });
   };
+
+  const handleGptClick = () => {
+    dispatch(toggleGPTSearch());
+  };
+
+  const handleLangChange = (event) => {
+    dispatch(changeLanguage(event.target.value));
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -47,6 +59,22 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt="logo"></img>
       {user && (
         <div className="flex p-2">
+          <select
+            className="p-3 mt-5 mb-2 mr-2 rounded-lg bg-gray-600 text-white"
+            onChange={handleLangChange}
+          >
+            {SUPPORTED_LANGUAGES.map((language) => (
+              <option key={language.identifier} value={language.identifier}>
+                {language.name}
+              </option>
+            ))}
+          </select>
+          <button
+            className="bg-blue-600 rounded-lg px-4 text-white h-12 mt-5 mx-2 font-semibold hover:opacity-80"
+            onClick={handleGptClick}
+          >
+            GPT Search
+          </button>
           <div className="w-12 h-12 mr-2 mx-2 mt-5">
             <img
               className=""
@@ -57,7 +85,7 @@ const Header = () => {
           </div>
 
           <button
-            className="bg-red-500 rounded-lg m-2 h-12 mt-5 pl-4 pr-4 font-semibold"
+            className="bg-red-500 rounded-lg m-2 h-12 mt-5 pl-4 pr-4 font-semibold hover:opacity-80"
             onClick={handleSignOut}
           >
             Sign Out
