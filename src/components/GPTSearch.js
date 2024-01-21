@@ -10,7 +10,7 @@ const GPTSearch = () => {
         <img
           src={BACKGROUND_IMG_URL}
           alt="background"
-          className="absolute object-cover w-full h-full -z-10"
+          className="fixed object-cover w-full h-full -z-10"
         ></img>
       </div>
       <GPTSearchBar></GPTSearchBar>

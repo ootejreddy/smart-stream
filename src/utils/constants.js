@@ -18,3 +18,6 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
 ];
+export const OPEN_AI_KEY =
+  "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";
+export const MOVIE_URL = "https://api.themoviedb.org/3/search/movie?query=";

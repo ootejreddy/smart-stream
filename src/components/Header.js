@@ -14,7 +14,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-
+  const showGPTSearch = useSelector((store) => store.gptSearch.showGPTSearch);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -59,21 +59,24 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt="logo"></img>
       {user && (
         <div className="flex p-2">
-          <select
-            className="p-3 mt-5 mb-2 mr-2 rounded-lg bg-gray-600 text-white"
-            onChange={handleLangChange}
-          >
-            {SUPPORTED_LANGUAGES.map((language) => (
-              <option key={language.identifier} value={language.identifier}>
-                {language.name}
-              </option>
-            ))}
-          </select>
+          {showGPTSearch && (
+            <select
+              className="p-3 mt-5 mb-2 mr-2 rounded-lg bg-gray-600 text-white"
+              onChange={handleLangChange}
+            >
+              {SUPPORTED_LANGUAGES.map((language) => (
+                <option key={language.identifier} value={language.identifier}>
+                  {language.name}
+                </option>
+              ))}
+            </select>
+          )}
+
           <button
             className="bg-blue-600 rounded-lg px-4 text-white h-12 mt-5 mx-2 font-semibold hover:opacity-80"
             onClick={handleGptClick}
           >
-            GPT Search
+            {showGPTSearch ? "Homepage" : "GPT Search"}
           </button>
           <div className="w-12 h-12 mr-2 mx-2 mt-5">
             <img
