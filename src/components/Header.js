@@ -80,7 +80,7 @@ const Header = () => {
           </button>
           <div className="w-12 h-12 mr-2 mx-2 mt-5">
             <img
-              className="hidden md:block"
+              className=""
               class="profile-icon"
               src={user?.photoURL}
               alt=""
