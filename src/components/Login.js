@@ -136,7 +136,7 @@ const Login = () => {
             type="button"
             onClick={handleFormSubmit}
           >
-            {isSignInForm ? "Sign Up" : "Login"}
+            {isSignInForm ? "Login" : "Sign Up"}
           </button>
           <p
             className="text-white text-l cursor-pointer"
