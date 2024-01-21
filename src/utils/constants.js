@@ -8,8 +8,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNjYyYWZiNzBmZDlkOWYzMmFkNDJkMDg1OWY4NzQyNCIsInN1YiI6IjY1YTQzNTJhMWYwMjc1MDExZTA4YzczMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.B4R8H2rallG03OhDrDC7fBWb9_RnFpiztcszVfPbIuY",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w300/";
@@ -18,6 +17,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
 ];
-export const OPEN_AI_KEY =
-  "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";
+export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
 export const MOVIE_URL = "https://api.themoviedb.org/3/search/movie?query=";

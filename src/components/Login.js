@@ -99,7 +99,7 @@ const Login = () => {
           className="absolute object-cover w-full h-full"
         ></img>
       </div>
-      <div className="w-3/12 my-44 mx-auto right-0 left-0 absolute">
+      <div className="w-full md:w-3/12 my-44 mx-auto right-0 left-0 absolute">
         <form
           className="p-12 bg-slate-900 bg-opacity-90"
           // onSubmit={handleFormSubmit}

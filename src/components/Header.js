@@ -55,10 +55,10 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute px-8 py-2 w-full bg-gradient-to-b from-black z-10 flex justify-between">
-      <img className="w-44" src={LOGO} alt="logo"></img>
+    <div className="absolute px-8 py-2 w-full bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo"></img>
       {user && (
-        <div className="flex p-2">
+        <div className="flex p-2 justify-between">
           {showGPTSearch && (
             <select
               className="p-3 mt-5 mb-2 mr-2 rounded-lg bg-gray-600 text-white"
@@ -80,7 +80,7 @@ const Header = () => {
           </button>
           <div className="w-12 h-12 mr-2 mx-2 mt-5">
             <img
-              className=""
+              className="hidden md:block"
               class="profile-icon"
               src={user?.photoURL}
               alt=""
